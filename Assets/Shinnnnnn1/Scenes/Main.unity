@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpd: 0.5
-  jumpPow: 4
+  jumpPow: 6
   sensitivity: 0
 --- !u!54 &1336143045
 Rigidbody:
