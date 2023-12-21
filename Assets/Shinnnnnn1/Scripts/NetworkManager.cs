@@ -8,11 +8,16 @@ using TMPro;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+
+    public MenuRPC menu;
+
     public TMP_Text statusText;
     public GameObject state;
     public InputField roomInput, NickNameInput;
     public Image[] matching;
     public TMP_Text LocalText;
+
+    PhotonView photo;
 
     float scene;
 
@@ -34,7 +39,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void JoinRandomOrCreateRoom() => PhotonNetwork.JoinRandomRoom();
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        // ƒ‹[ƒ€‚ÌŽQ‰Ál”‚ð2l‚ÉÝ’è‚·‚é
+        // ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌŽQï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½2ï¿½lï¿½ÉÝ’è‚·ï¿½ï¿½
         var roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 2;
 
@@ -55,10 +60,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print("Joined " + PhotonNetwork.CurrentRoom.Name);
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
+            Debug.Log("game start");
+
+            menu.photo.RPC("Next", RpcTarget.All);
+
             PhotonNetwork.CurrentRoom.IsOpen = false;
+
         }
         //PhotonNetwork.LoadLevel("SampleScene");
     }
+
     public override void OnPlayerEnteredRoom(Player newPlayer) 
     {
         print(newPlayer);
