@@ -9,7 +9,7 @@ using TMPro;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
 
-    public MenuRPC menu;
+    public UIManager ui;
 
     public TMP_Text statusText;
     public GameObject state;
@@ -37,6 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 
     public void JoinRandomOrCreateRoom() => PhotonNetwork.JoinRandomRoom();
+
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         // ���[���̎Q���l����2�l�ɐݒ肷��
@@ -52,7 +53,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        //PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnJoinedRoom()
@@ -62,7 +63,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("game start");
 
-            menu.photo.RPC("Next", RpcTarget.All);
+            ui.photo.RPC("Next", RpcTarget.All);
 
             PhotonNetwork.CurrentRoom.IsOpen = false;
 

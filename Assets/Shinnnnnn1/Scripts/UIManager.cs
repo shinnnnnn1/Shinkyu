@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MenuRPC : MonoBehaviourPunCallbacks
+public class UIManager : MonoBehaviourPunCallbacks
 {
     [HideInInspector] public PhotonView photo;
 
-    private void Start()
+    public float status;
+
+    void Start()
     {
         photo = GetComponent<PhotonView>();
     }
 
-    [PunRPC]
-    void Next()
+    public void Next(bool previous)
     {
-        transform.localPosition += Vector3.right * (-1920);
-    }
-
-    [PunRPC]
-    void ButtonOn()
-    {
+        int direction = previous ? -1 : 1;
 
     }
 }
