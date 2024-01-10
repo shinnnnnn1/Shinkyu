@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager instance
     {
@@ -16,6 +17,11 @@ public class GameManager : MonoBehaviour
         }
     }
     private static GameManager instancee;
+
+    void Start()
+    {
+        PhotonNetwork.Instantiate("Char01", Vector3.zero, Quaternion.identity);
+    }
 
     void Update()
     {

@@ -1,14 +1,18 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : MonoBehaviourPun
 {
     Rigidbody rigid;
     [SerializeField] [Range(0, 3)] float moveSpd;
     [SerializeField] float jumpPow;
     [SerializeField] float sensitivity;
+    [SerializeField] bool mine;
+
+    [SerializeField] Text mins;
 
     void Awake()
     {
@@ -17,10 +21,13 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
-        Jump();
+        //Jump();
+        //mins.text = photonView.IsMine.ToString();
+        mins.text = photonView.ViewID.ToString();
     }
     void FixedUpdate()
     {
+        if (!photonView.IsMine) { return; }
         Move();
         RotateY();
         RotateX();
